@@ -1,0 +1,21 @@
+{
+    "name": "YVR.Player.Editor",
+    "rootNamespace": "YVR.Player.Editor",
+    "references": [
+        "GUID:2d7f75410618a9d4eb438b1fa7b8632a",
+        "GUID:2e695761a1e983c47b1e620c7d4a5cd7",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

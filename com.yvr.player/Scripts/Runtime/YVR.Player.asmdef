@@ -1,0 +1,16 @@
+{
+    "name": "YVR.Player",
+    "rootNamespace": "YVR.Player",
+    "references": [
+        "GUID:c001ac5eb50625c4398c23d335026aad"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

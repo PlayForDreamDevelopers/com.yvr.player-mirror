@@ -7,7 +7,7 @@
     </a>
     <h1 align="center"> com.yvr.player-mirror </h1>
     <p align="center">
-        com.yvr.player-mirror 包的镜像仓库
+        com.yvr.player 包的镜像仓库
         <br />
         <a href="https://github.com/PlayForDreamDevelopers/com.yvr.player-mirror"><strong>查看文档 »</strong></a>
         <br />
@@ -25,7 +25,7 @@
 
 ## 关于项目
 
-这是 `com.yvr.player-mirror` 包的镜像仓库。
+这是 `com.yvr.player` 包的镜像仓库。
 基于 [ExoPlayer](https://docs.unity.cn/cn/2022.3/Manual/class-VideoPlayer.html) 的 Unity Player 库，提供比 [Unity VideoPlayer](https://docs.unity.cn/cn/2022.3/Manual/class-VideoPlayer.html) 更强的解码性能和更多的格式支持。
 ### 示例
 

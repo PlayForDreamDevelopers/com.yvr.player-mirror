@@ -7,7 +7,7 @@
     </a>
     <h1 align="center"> com.yvr.player-mirror </h1>
     <p align="center">
-        Mirror repository of the package com.yvr.player-mirror
+        Mirror repository of the package com.yvr.player
         <br />
         <a href="https://github.com/PlayForDreamDevelopers/com.yvr.player-mirror/tree/main"><strong>View Documentation »</strong></a>
         <br />
@@ -25,7 +25,7 @@
 
 ## About The Project
 
-This is a mirror repository of the package `com.yvr.player-mirror`.Unity Player library based on [ExoPlayer](https://github.com/google/ExoPlayer), which provides stronger decoding performance and more format support than [Unity VideoPlayer](https://docs.unity.cn/cn/2022.3/Manual/class-VideoPlayer.html).
+This is a mirror repository of the package `com.yvr.player`.Unity Player library based on [ExoPlayer](https://github.com/google/ExoPlayer), which provides stronger decoding performance and more format support than [Unity VideoPlayer](https://docs.unity.cn/cn/2022.3/Manual/class-VideoPlayer.html).
 ### Samples
 
 There are several samples available for the feature of this package：

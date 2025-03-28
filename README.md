@@ -30,6 +30,7 @@ This is a mirror repository of the package `com.yvr.player`.Unity Player library
 
 There are several samples available for the feature of this package：
 
+- [YVRPlayer](https://github.com/PlayForDreamDevelopers/YPlayerSample-Unity)
 
 ## Requirements
 

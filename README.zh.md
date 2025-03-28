@@ -31,6 +31,7 @@
 
 该包的功能提供了几个示例：
 
+- [YVRPlayer](https://github.com/PlayForDreamDevelopers/YPlayerSample-Unity)
 
 ## 要求
 

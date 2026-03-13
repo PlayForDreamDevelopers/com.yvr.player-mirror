@@ -1,10 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using YVR.AndroidDevice.Core;
+using Debug = UnityEngine.Debug;
 
 namespace YVR.Player
 {
@@ -15,6 +17,7 @@ namespace YVR.Player
             None = 0,
             SetupVideoTexture,
             UpdateTexImage,
+            ReleaseVideoTexture,
         }
 
         [DllImport("playersdk")]
@@ -48,10 +51,14 @@ namespace YVR.Player
 
         public readonly DreamPlayerListener listener;
 
+        private Queue<string> subtitleDataQueue = new Queue<string>();
+
         public bool prepared { get; private set; }
         public PlaybackState playbackState { get; private set; }
 
         private readonly ConcurrentQueue<GLEvent> m_GLEvents = new();
+
+        private Action<string> onTimedText;
 
         public DreamPlayer() : base(
             new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity"))
@@ -64,6 +71,7 @@ namespace YVR.Player
                 m_BlackTextureId = blackTextureId;
                 m_NeedCreateTexture = true;
             };
+            listener.textOutputing += OnTimedText;
             SetListener(listener);
 
             m_PlayerID = CreatePlayer(ajcBase.objPtr, GCHandle.ToIntPtr(containerGCHandle));
@@ -96,6 +104,12 @@ namespace YVR.Player
                     // Log(m_PlayerID, $"dequeue glEvent: {glEvent}");
                     GL.IssuePluginEvent(GetRenderEventFunc(), m_PlayerID * 0X1000 + (byte)glEvent);
                 }
+            }
+
+            while (subtitleDataQueue.Count != 0)
+            {
+                string yPlayerSubtitleData = subtitleDataQueue.Dequeue();
+                onTimedText?.Invoke(yPlayerSubtitleData);
             }
         }
 
@@ -234,6 +248,21 @@ namespace YVR.Player
         internal void Release()
         {
             ajcBase.CallJNI(elements.release);
+
+            if (texture != null)
+            {
+                UnityEngine.Object.Destroy(texture);
+                texture = null;
+            }
+
+            if (blackTexture != null)
+            {
+                UnityEngine.Object.Destroy(blackTexture);
+                blackTexture = null;
+            }
+
+            GL.IssuePluginEvent(GetRenderEventFunc(), m_PlayerID * 0X1000 + (byte)GLEvent.ReleaseVideoTexture);
+
             Log(m_PlayerID);
         }
 
@@ -273,6 +302,22 @@ namespace YVR.Player
         {
             ajcBase.CallJNI(elements.setListener, dreamPlayerListener);
             Log(m_PlayerID, dreamPlayerListener);
+        }
+
+        public void AddOnTimedTextListener(Action<string> callback)
+        {
+            this.onTimedText += callback;
+        }
+
+        public void RemoveOnTimedTextListener(Action<string> callback)
+        {
+            this.onTimedText -= callback;
+        }
+
+        private void OnTimedText(string text)
+        {
+            Debug.LogError("OnTimedText:" + text );
+                subtitleDataQueue.Enqueue(text);
         }
 
         ~DreamPlayer()

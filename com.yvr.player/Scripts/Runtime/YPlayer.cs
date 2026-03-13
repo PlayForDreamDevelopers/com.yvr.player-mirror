@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,9 +7,10 @@ namespace YVR.Player
     public enum HDRType
     {
         Auto = -1,
-        SDR,
-        HDR10,
-        HLG,
+        SDR_sRGB = 0,
+        HDR10 = 1,
+        HLG = 2,
+        SDR_P3 = 4,
     }
 
     // TODO: Mock for Editor Env
@@ -237,6 +239,17 @@ namespace YVR.Player
             if (m_DreamPlayer == null) return;
             m_DreamPlayer.SetColorSpace(colorSpace);
         }
+
+        public void AddOnTimedTextListener(Action<string> callback)
+        {
+            m_DreamPlayer.AddOnTimedTextListener(callback);
+        }
+
+        public void RemoveOnTimedTextListener(Action<string> callback)
+        {
+            m_DreamPlayer.RemoveOnTimedTextListener(callback);
+        }
+
 
         private void Update()
         {
